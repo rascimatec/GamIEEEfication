@@ -1,0 +1,12 @@
+{
+  "name": "GamIEEE",
+  "displayName": "GamIEEE",
+  "expo": {
+    "name": "GamIEEE",
+    "slug": "GamIEEE",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
