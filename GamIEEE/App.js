@@ -4,15 +4,15 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Linking} fr
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
 import {Picker} from '@react-native-community/picker';
-const f = require('./src/functions.js')
+const { ScreenStackHeaderCenterView } = require("react-native-screens")
+import {createR, login, forgot, profile} from './src/functions';
+
 
 function HomeScreen({navigation}) {
   let state =
   {
-    email: "",
     usuario: "",
-    senha: "",
-    capitulo: ""
+    senha: ""
   }
 
   return (
@@ -38,18 +38,18 @@ function HomeScreen({navigation}) {
     <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Perfil')}>
       <Text style={styles.loginText}>LOGIN</Text>
     </TouchableOpacity>
-    {/* <TouchableOpacity onPress={console.log(state)}>
-      <Text>Teste</Text>
-    </TouchableOpacity> */} 
     <TouchableOpacity onPress = {() => navigation.navigate('Esqueceu')}>
       <Text style = {styles.forgot}>Esqueceu a senha?</Text>
     </TouchableOpacity>
-    <TouchableOpacity onPress = {() => {f.create(); navigation.navigate('Criar')}}>
+    <TouchableOpacity onPress = {() => {console.log("Criando conta"); navigation.navigate('Criar')}}>
       <Text style={styles.criar}>Criar conta</Text>
     </TouchableOpacity>
-      <TouchableOpacity style = {logos.touch} onPress = {() => Linking.openURL("https://www.instagram.com/ieeecimatec/")}>
-        <Image style={logos.img} source = {require('./images/logoieeecimatec.png')}/>  
-      </TouchableOpacity>
+    <TouchableOpacity onPress={() => login()}>
+          <Text style={styles.bot_teste}>Lista</Text>
+    </TouchableOpacity>  
+    <TouchableOpacity style = {logos.touch} onPress = {() => Linking.openURL("https://www.instagram.com/ieeecimatec/")}>
+      <Image style={logos.img} source = {require('./images/logoieeecimatec.png')}/>  
+    </TouchableOpacity>
   </View>
   );
 }
@@ -73,12 +73,12 @@ function Perfil() {
 
 function Criar() {
   let info = {
-    user: '', 
-    password: '',
+    user: '',
     email: '',
-    secret_question: '',
-    secret_question_answer: '',
-    branch: ''
+    senha: '',
+    ps: '',
+    r_ps: '',
+    ramo: ''
   }
 
   return (
@@ -92,16 +92,16 @@ function Criar() {
         </View>
         <Text style = {criar.inputTitle}>Senha</Text> 
         <View style = {styles.inputView}>
-          <TextInput secureTextEntry style = {criar.input} onChangeText={text => info['password'] = text}></TextInput>
+          <TextInput secureTextEntry style = {criar.input} onChangeText={text => info['senha'] = text}></TextInput>
         </View>
         <Text style = {criar.inputTitle}>Email</Text>
         <View style = {styles.inputView}>
           <TextInput style = {criar.input} onChangeText={text => info['email'] = text}></TextInput>
-        </View>
+        </View> 
         <Text style = {criar.inputTitle}>Pergunta Secreta</Text>
         <Picker
               style = {{width: "80%", height: 50, marginBottom: 20, backgroundColor: '#465881', color: 'white'}}
-              onValueChange={text => info['secret_question'] = text}
+              onValueChange={text => info['ps'] = text}
             >
           <Picker.Item  label="---" value="none"/>
           <Picker.Item label="Quanto é 2 + 2?" value="soma"/>
@@ -109,7 +109,7 @@ function Criar() {
         </Picker>
         <Text style = {criar.inputTitle}>Resposta</Text>
         <View style = {styles.inputView}>
-          <TextInput style = {criar.input} onChangeText={text => info['secret_question_answer'] = text}></TextInput>
+          <TextInput style = {criar.input} onChangeText={text => info['r_ps'] = text}></TextInput>
         </View>
         <Text style = {criar.inputTitle}>Ramo</Text>
         <Picker
@@ -121,12 +121,17 @@ function Criar() {
           <Picker.Item label="CIMATEC" value="cimatec"/>
           <Picker.Item label="Outro" value="other"/>
         </Picker>
-        <TouchableOpacity style = {criar.confirmBtn} onPress = {() => console.log(info)}><Text style={criar.confirmTXT}>Cadastrar-se</Text></TouchableOpacity>
+        <TouchableOpacity style = {criar.confirmBtn} onPress = {() =>{console.log(info); createR(info.email, info.senha, info.user, info.xp, info.membresia)}}><Text style={criar.confirmTXT}>Cadastrar-se</Text></TouchableOpacity>
     </View>
   );
 }
 
 function Esqueceu() {
+  let info = {
+    email: '',
+    secret_question: '',
+    secret_question_answer: ''
+  }
   return (
     <View style={esqueceu.container}>
         <View style = {esqueceu.fortgotTXT_view}>
@@ -158,7 +163,6 @@ function Esqueceu() {
 const Stack = createStackNavigator();
 
 export default class App extends React.Component {
-
   render() {
     return (
       <NavigationContainer>
@@ -245,6 +249,12 @@ const styles = StyleSheet.create({
   },
   criar: {
     color: 'black'
+  },
+  bot_teste: {
+    color: 'black',
+    fontSize: '25px',
+    fontWeight: 'bold',
+    marginTop: '10px'
   }
 });
 
