@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 app.get('/users', function (req, res) {
     connection.getConnection(function (err, connection) {
     
-    connection.query('SELECT * FROM users', function (error, results, fields) {
+    connection.query('SELECT * FROM users ORDER BY xp DESC', function (error, results, fields) {
       
       res.send(results)
     });

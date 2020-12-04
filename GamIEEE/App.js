@@ -46,7 +46,10 @@ function HomeScreen({navigation}) {
     </TouchableOpacity>
     <TouchableOpacity onPress={() => login()}>
           <Text style={styles.bot_teste}>Lista</Text>
-    </TouchableOpacity>  
+    </TouchableOpacity> 
+    <TouchableOpacity onPress={() => navigation.navigate('PerfilAdm')}>
+          <Text style={styles.bot_teste}>Admin</Text>
+    </TouchableOpacity> 
     <TouchableOpacity style = {logos.touch} onPress = {() => Linking.openURL("https://www.instagram.com/ieeecimatec/")}>
       <Image style={logos.img} source = {require('./images/logoieeecimatec.png')}/>  
     </TouchableOpacity>
@@ -55,17 +58,42 @@ function HomeScreen({navigation}) {
 }
 
 function Perfil() {
+
+  let ranking = {
+    primeiro: '',
+    segundo: '',
+    terceiro: '',
+    quarto: '',
+    quinto: ''
+  }
   return (
     <View style={perfil.container}>
       <View style={perfil.cabeçalho}>
-        <Text>Cabeçalho</Text>
+        <Image style={perfil.profile} source = {require('./images/user.png')}/>
+        <Text style = {{flexDirection: 'row', alignSelf: 'auto', marginLeft: '7px'}}>Lvl 10</Text>
+        <Text style = {{borderWidth: '1px', flexDirection: 'row', marginLeft: '10px', borderRadius: 15, padding: 2.5}}>XP: 1152</Text>
+        <View style = {{borderWidth: '1px', flexDirection: 'row', marginLeft: '10px', borderRadius: 15, padding: 2.5}}>
+          <Image style={perfil.coin} source = {require('./images/coin.png')}/>
+          <Text style = {{marginLeft: '3px'}}>10</Text>
+        </View>
       </View>
+      <Text>Notícias</Text>
       <View style={perfil.noticias}>
-        <Text>Notícias</Text>
+        
       </View>
+      <Text>Ranking</Text>
       <View style={perfil.inventario}>
-        <Text>Insígnias</Text>
+        <Text>1. </Text>
+        <Text>2. </Text>
+        <Text>3. </Text>
+        <Text>4. </Text>
+        <Text>5. </Text>
       </View>
+      <View style={perfil.cabeçalho}>
+          <Image style={perfil.img} source = {require('./images/mais.png')}/>
+          <Image style={perfil.img} source = {require('./images/tarefas.png')}/>
+          <Image style={perfil.img} source = {require('./images/user.png')}/>
+        </View>
     </View>
 
   );
@@ -160,21 +188,121 @@ function Esqueceu() {
   );
 }
 
-const Stack = createStackNavigator();
+function PerfilAdm({navigation}) {
 
+  let ranking = {
+    primeiro: '',
+    segundo: '',
+    terceiro: '',
+    quarto: '',
+    quinto: ''
+  }
+
+  return (
+    <View style={perfil.container}>
+      <View style={perfil.cabeçalho}>
+        <Image style={perfil.profile} source = {require('./images/user.png')}/>
+        <Text style = {{flexDirection: 'row', alignSelf: 'auto', marginLeft: '7px'}}>Lvl 10</Text>
+        <Text style = {{borderWidth: '1px', flexDirection: 'row', marginLeft: '10px', borderRadius: 15, padding: 2.5}}>XP: 1152</Text>
+        <View style = {{borderWidth: '1px', flexDirection: 'row', marginLeft: '10px', borderRadius: 15, padding: 2.5}}>
+          <Image style={perfil.coin} source = {require('./images/coin.png')}/>
+          <Text style = {{marginLeft: '3px'}}>10</Text>
+        </View>
+        <TouchableOpacity style = {perfil.admButton} onPress = {() => navigation.navigate('adminAddTask')}>
+          <Text>
+              Painel de Controle
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <Text>Notícias</Text>
+      <View style={perfil.noticias}>
+        
+      </View>
+      <Text>Ranking</Text>
+      <View style={perfil.inventario}>
+        <Text>1. </Text>
+        <Text>2. </Text>
+        <Text>3. </Text>
+        <Text>4. </Text>
+        <Text>5. </Text>
+      </View>
+      <View style={perfil.cabeçalho}>
+          <Image style={perfil.img} source = {require('./images/mais.png')}/>
+          <Image style={perfil.img} source = {require('./images/tarefas.png')}/>
+          <Image style={perfil.img} source = {require('./images/user.png')}/>
+        </View>
+    </View>
+
+  );
+}
+
+function adminAddTask() {
+  let info = {
+    nome: '',
+    xp: '',
+    descricao: ''
+  }
+  
+  return (
+    <View style={esqueceu.container}>
+        <View style = {esqueceu.fortgotTXT_view}>
+          <Text style = {esqueceu.forgotTXT}>Nome da tarefa</Text>
+        </View>
+        <View style = {styles.inputView}>
+          <TextInput 
+          style = {criar.input} 
+          onChangeText={text => info['nome'] = text}
+          placeholder = "Nome"
+          placeholderTextColor = 'white'
+          ></TextInput>
+        </View>
+        <View style = {esqueceu.fortgotTXT_view}>
+          <Text style = {esqueceu.forgotTXT}>Descrição da tarefa</Text>
+        </View>
+        <View style = {styles.inputView}>
+          <TextInput 
+          style = {criar.input} 
+          onChangeText={text => info['descricao'] = text}
+          placeholder = "Descrição"
+          placeholderTextColor = 'white'
+          ></TextInput>
+        </View>
+        <View style = {esqueceu.fortgotTXT_view}>
+          <Text style = {esqueceu.forgotTXT}>Valor de XP</Text>
+        </View>
+        <View style = {styles.inputView}>
+          <TextInput 
+          style = {criar.input} 
+          onChangeText={text => info['xp'] = text}
+          placeholder = "XP"
+          placeholderTextColor = 'white'
+          ></TextInput>
+        </View>
+        <TouchableOpacity onPress = {() => console.log(info)} style={criar.confirmBtn}><Text style={styles.loginText}>Cadastrar Tarefa</Text></TouchableOpacity>
+    </View>
+  );
+}
+
+
+const Stack = createStackNavigator();
 export default class App extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      current: 'Blank',
+    }
+  }
+  
   render() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-              <Stack.Screen options={{
-          title: 'Login',
-          headerTitleAlign: 'center'
-        
-        }} name="Home" component={HomeScreen} />
-              <Stack.Screen name="Perfil" component={Perfil} />
-              <Stack.Screen name="Criar" component={Criar} />
-              <Stack.Screen name="Esqueceu" component={Esqueceu} />
+              <Stack.Screen options={{headerShown: true}} name="Login" component={HomeScreen}/>
+              <Stack.Screen options={{headerShown: true}} name="Perfil" component={Perfil}/>
+              <Stack.Screen options={{headerShown: true}} name="Criar" component={Criar}/>
+              <Stack.Screen options={{headerShown: true}} name="Esqueceu" component={Esqueceu}/>
+              <Stack.Screen options={{headerShown: true}} name="PerfilAdm" component={PerfilAdm}/>
+              <Stack.Screen options={{headerShown: true}} name="adminAddTask" component={adminAddTask}/>
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -291,36 +419,73 @@ const perfil = StyleSheet.create ({
   container:
   {
     flex: 1,
-    backgroundColor: 'blue',
     alignItems: 'center',
     justifyContent: "center"
   },
   cabeçalho:
   {
-    backgroundColor: "gray",
+    flexDirection: 'row',
+    backgroundColor: '#465881',
     alignItems: "center",
     width: "100%",
-    height: "16.5%",
-    borderWidth: 2,
-    borderColor: 'black'
+    height: "8.5%",
+    borderTopWidth: 0.5,
+    borderBottomWidth: 0.5,
+    borderColor: 'black',
+    justifyContent: "space-evenly"
   },
   noticias:
   {
     flex: 2,
     backgroundColor: 'white',
     alignItems: "center",
-    width: "100%",
-    borderWidth: 2,
-    borderColor: 'black'
+    width: "100%"
   },
   inventario:
   {
     flex: 2,
+    flexDirection: 'column',
     backgroundColor: "white",
-    alignItems: 'center',
-    width: "100%",
+    alignItems: 'flex-start',
+    width: "100%"
+  },
+  img:
+  {
+      flex: 1,
+      resizeMode: "contain",
+      alignSelf: "center",
+      width: "40%",
+      height: "40%"
+  },
+  profile:
+  {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    resizeMode: "contain",
+    alignSelf: "center",
+    marginLeft: '10px',
+    height: "40%",
     borderWidth: 2,
-    borderColor: 'black'
+    borderRadius: 40,
+    borderColor: 'black',
+    padding: 10
+  },
+  coin:
+  {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    resizeMode: "contain",
+    alignSelf: "center",
+    height: "40%",
+    padding: 10
+  },
+  admButton:
+  {
+    borderRadius: 20,
+    borderStyle: "solid",
+    borderColor: 'black',
+    borderWidth: 0.5,
+    padding: 5
   }
 })
 

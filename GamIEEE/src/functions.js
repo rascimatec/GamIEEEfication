@@ -12,6 +12,22 @@ const login = async () => {
     }
 }
 
+const data = async () => {
+    try {
+        const response = await fetch('http://localhost:3000/users', {
+            method: 'GET',
+            credentials: 'same-origin'
+        });
+        const exam = await response.json();
+        foreach(exam)
+        {
+            console.log(exam.nome)
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 const createR = async (email, senha, nome) =>
 {
     try {
@@ -34,4 +50,4 @@ const createR = async (email, senha, nome) =>
     }
 }
 
-module.exports = {createR, login}
+module.exports = {createR, login, data}
