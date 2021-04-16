@@ -84,6 +84,17 @@ const styles = StyleSheet.create( {
         marginVertical: 5,
         paddingHorizontal: 15
      },
+     emailInput: {
+        backgroundColor:'#FFF',
+        width: '100%',
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#000',
+        textAlign: 'left',
+        marginVertical: 5,
+        paddingHorizontal: 15,
+        color: '#000'
+    },
      inputDate: {
         backgroundColor:'#FFF',
         width: '100%',

@@ -25,8 +25,8 @@ export const AuthProvider: React.FC = ({children}) => {
 
     useEffect( () => {
         async function loadStoragedData () {
-            const storagedUser = await AsyncStorage.getItem('@AppName:user');
-            const storagedToken = await AsyncStorage.getItem('@AppName:token');
+            const storagedUser = await AsyncStorage.getItem('@Gamieeefication:user');
+            const storagedToken = await AsyncStorage.getItem('@Gamieeefication:token');
 
             if (storagedUser && storagedToken)
             {

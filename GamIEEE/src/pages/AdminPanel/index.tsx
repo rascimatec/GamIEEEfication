@@ -1,18 +1,36 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import styles from './styles';
+import inputStyles from './inputStyles';
 import { useNavigation } from '@react-navigation/native'
-import { TextInput } from 'react-native-gesture-handler';
 import Footer from '../../components/footer'
 import Header from '../../components/header'
 import Button from '../../components/button'
-import { Picker } from '@react-native-picker/picker';
+import RNPickerSelect from "react-native-picker-select";
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 
 const ProfileScreen: React.FC = () => {
     const navigation = useNavigation();
 
     const [selectedLanguage, setSelectedLanguage] = useState();
+
+    const pickerStyle = {
+        inputIOS: {
+            color: 'white',
+            paddingHorizontal: 10,
+            backgroundColor: 'red',
+            borderRadius: 5,
+        },
+        placeholder: {
+            color: 'white',
+          },
+        inputAndroid: {
+            color: 'white',
+            paddingHorizontal: 10,
+            backgroundColor: 'red',
+            borderRadius: 5,
+        },
+    };
 
     return (
         <View style={styles.body}>
@@ -33,21 +51,20 @@ const ProfileScreen: React.FC = () => {
                             </TextInput>
                             <TextInput style={styles.inputDate} dataDetectorTypes={'calendarEvent'} placeholder={'Prazo final'} placeholderTextColor={'#000'}>
                             </TextInput>
-                            <View style = {styles.pickerView}>
-                            <Picker
-                                itemStyle={{  color: "#000", fontFamily:"Ebrima", fontSize:17 }}
-                                selectedValue={selectedLanguage}
-                                onValueChange={(itemValue, itemIndex) =>
-                                setSelectedLanguage(itemValue)
-                                }
-                            >
-                                <Picker.Item label="TODOS" value="TODOS" />
-                                <Picker.Item label="RAS" value="RAS" />
-                                <Picker.Item label="EMBS" value="EMBS" />
-                                <Picker.Item label="PES" value="PES" />                               
-                                <Picker.Item label="OUTROS" value="OUTROS" />
-                            </Picker>
-                            </View>
+                            <View style={styles.emailInput}>
+                        <RNPickerSelect
+                            onValueChange={(value) => console.log(value)}
+                            items={[
+                                { label:"Qual nome do seu primeiro animal de estimação?", value: "animal" },
+                                { label: "Qual seu apelido de infância?", value: "apelido" },
+                                { label: "Qual primeiro livro que você leu?", value: "livro" },
+                                { label: "Qual nome da sua primeira professora?", value: "professora" },
+                                { label: "Onde foi o seu primeiro emprego?", value: "emprego" },
+                            ]}
+                            style = {inputStyles}
+                            
+                        />
+            </View>
                             <TextInput style={styles.inputDescription} dataDetectorTypes={'calendarEvent'} placeholder={'Descrição da tarefa...'} placeholderTextColor={'#000'}>
                             </TextInput>
                             <Button>Confirmar</Button>

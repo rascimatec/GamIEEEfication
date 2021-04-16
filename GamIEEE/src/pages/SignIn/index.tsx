@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
-
+import { View, Text, Image, TextInput } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
 
-const styles = StyleSheet.create( {
-    container: {flex: 1, justifyContent: 'center'}
-});
+import styles from './styles';
 
 const SignIn: React.FC = () => {
 
@@ -21,7 +20,8 @@ const SignIn: React.FC = () => {
 //***************************Função com Async/Await**************************\\
 
     const { signed, user, signIn } = useAuth();
-
+    const navigation = useNavigation();
+    
     console.log(signed);
     console.log(user);
     
@@ -30,8 +30,24 @@ const SignIn: React.FC = () => {
     }
 
 return (
-    <View style = {styles.container}>
-        <Button title = "Sign In" onPress = {handleSignIn} />
+    <View style = {styles.body}>
+        <Image
+          style={styles.logo}
+          source = {{uri: 'https://res.cloudinary.com/gamieeefication/image/upload/v1618521720/logo_nkecyd.png'}}
+        />
+        <View style = {styles.content}>
+        
+            <Text style = {styles.h1}>GamIEEE</Text>
+            <TextInput style={styles.emailInput} placeholder={'Nome de usuário'} placeholderTextColor={'#000'}>
+            </TextInput>
+            <TextInput style={styles.emailInput} placeholder={'Senha'} placeholderTextColor={'#000'}>
+            </TextInput>
+            <TouchableOpacity onPress = {handleSignIn} style = {styles.buttonOpacity}><View><Text style = {styles.buttonTXT}>Entrar</Text></View></TouchableOpacity>
+            <TouchableOpacity onPress = {() => navigation.navigate('Forgot')}><Text style = {styles.forgotTXT}>Esqueceu sua senha?</Text></TouchableOpacity>
+        </View>
+        <View style = {styles.footer}>
+            <Text style = {styles.footerTXT}>Não tem conta?</Text><TouchableOpacity onPress = {() => navigation.navigate('SignUp')}><Text style = {styles.footerLink}>Criar sua conta</Text></TouchableOpacity>
+        </View>
     </View>
 )
 };

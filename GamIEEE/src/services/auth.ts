@@ -16,9 +16,9 @@ export function signIn():Promise<Response> {
             resolve({
                 token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVcJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
                 user: {
-                    name: 'Roberto',
+                    name: 'Laurinha',
                     email: 'john.doe@gmail.com',
-                    admin: true,
+                    admin: true
                 }
             })
         }, 2000);

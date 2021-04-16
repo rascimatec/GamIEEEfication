@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Animated, Image, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
 
 import styles from './styles';
 
@@ -11,7 +11,6 @@ import { TextInput } from 'react-native-gesture-handler';
 import Footer from '../../components/footer'
 import Header from '../../components/header'
 import UserInfo from '../../components/userInfo'
-import LinearGradient from 'react-native-linear-gradient'
 
 const ProfileScreen: React.FC = () => {
     const { signOut, user } = useAuth();
