@@ -64,6 +64,8 @@ return (
                               style = {inputStyles}
                         />
             </View>
+            <TextInput style={styles.emailInput} placeholder={'Resposta da pergunta secreta'} placeholderTextColor={'#000'}>
+            </TextInput>
             <View style={styles.emailInput}>
             <RNPickerSelect
                             onValueChange={(value) => setSecretQuestion(value)}
