@@ -41,7 +41,8 @@ export const AuthProvider: React.FC = ({children}) => {
     }, [])
     
     async function signIn() {
-        const response = await auth.signIn();
+        // const response = await auth.signIn();
+        const response = { token: '1', user: {name: 'a', email: 'a', admin: true }}
 
         const { token, user } = response;
 

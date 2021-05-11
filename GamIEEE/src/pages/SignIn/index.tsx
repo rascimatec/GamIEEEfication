@@ -3,6 +3,7 @@ import { View, Text, Image, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
+import { signInTest } from '../../services/auth'
 
 import styles from './styles';
 
@@ -22,11 +23,11 @@ const SignIn: React.FC = () => {
     const { signed, user, signIn } = useAuth();
     const navigation = useNavigation();
     
-    console.log(signed);
-    console.log(user);
+    // console.log(signed);
+    // console.log(user);
     
     async function handleSignIn () {
-        await signIn();
+        await signInTest();
     }
 
 return (

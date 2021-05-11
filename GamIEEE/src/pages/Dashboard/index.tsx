@@ -8,8 +8,8 @@ import styles from './styles';
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 
-
 const Dashboard: React.FC = () => {
+    
 return (
     <View style = {styles.body}>
         <Header/>
