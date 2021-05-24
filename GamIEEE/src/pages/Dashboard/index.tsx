@@ -10,6 +10,8 @@ import Footer from '../../components/footer'
 
 const Dashboard: React.FC = () => {
     
+    
+
 return (
     <View style = {styles.body}>
         <Header/>

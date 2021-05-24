@@ -3,7 +3,7 @@ import { View, Text, Image, TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../contexts/auth';
-import { signInTest } from '../../services/auth'
+import { signIn } from '../../services/auth'
 
 import styles from './styles';
 
@@ -27,7 +27,7 @@ const SignIn: React.FC = () => {
     // console.log(user);
     
     async function handleSignIn () {
-        await signInTest();
+        await signIn();
     }
 
 return (

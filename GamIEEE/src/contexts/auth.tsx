@@ -2,10 +2,20 @@ import React, { createContext, useState, useEffect, useContext } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
 import * as auth  from '../services/auth'
 import api from '../services/api'
+import { InteractionManager } from 'react-native'
+import { AxiosPromise } from 'axios'
 
 interface User {
     name: string,
-    email: string,
+    level: number,
+    chapter: string,
+    coins: number,
+    pendingTask: object,
+    completedTasks: object,
+    friendList: object,
+    badges: object,
+    xp: number,
+    member: boolean,
     admin: boolean
 }
 
@@ -13,7 +23,7 @@ interface AuthContextData {
     signed: boolean;
     user: User | null;
     loading: boolean;
-    signIn(): Promise<void>;
+    signIn(): AxiosPromise;
     signOut(): void;
 }
 
@@ -41,8 +51,19 @@ export const AuthProvider: React.FC = ({children}) => {
     }, [])
     
     async function signIn() {
-        // const response = await auth.signIn();
-        const response = { token: '1', user: {name: 'a', email: 'a', admin: true }}
+        const response = await auth.signIn();
+        
+        // const response = { token: '1', user: {name: 'teste',
+        //     level: 10,
+        //     chapter: 'teste',
+        //     coins: 10,
+        //     pendingTask: {},
+        //     completedTasks: {},
+        //     friendList: {},
+        //     badges: {},
+        //     xp: 10,
+        //     member: false,
+        //     admin: false}}
 
         const { token, user } = response;
 
