@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
-import { useAuth } from '../../contexts/auth';
 import styles from './styles';
 import Header from '../../components/header'
 import Footer from '../../components/footer'

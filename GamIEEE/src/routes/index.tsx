@@ -7,7 +7,7 @@ import AuthRoutes from './auth.routes'
 import AppRoutes from './app.routes'
 
 const Routes: React.FC = () => {
-    const {signed, loading, user} = useAuth();
+    const {isSigned} = useAuth();
 
     if (0) {
         return (
@@ -16,7 +16,7 @@ const Routes: React.FC = () => {
             </View>
         )
     }
-    return signed ? <AppRoutes/> : <AuthRoutes/>
+    return isSigned ? <AppRoutes/> : <AuthRoutes/>
 };
 
 export default Routes;

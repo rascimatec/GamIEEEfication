@@ -7,7 +7,16 @@ import { useAuth } from '../../../contexts/auth';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 
-const UserHeader: React.FC = () => {
+interface Props {
+    name: string | undefined,
+    level: number | undefined,
+    coins: number | undefined,
+    xp: number | undefined,
+    descricao: string | undefined,
+    capitulo: string | undefined
+ }
+
+const UserHeader: React.FC<Props> = ({name, level, coins}) => {
     const { signOut, user } = useAuth();
     const navigation = useNavigation();
 
@@ -21,8 +30,8 @@ const UserHeader: React.FC = () => {
                 <View style = {styles.topTabProfileContent}>
                     <FontAwesomeIcon icon = {faUser} size={ 24 }  />
                     <View style = {styles.profileSubTabContent}>
-                        <Text>{user?.name}</Text>
-                        <Text>NÍVEL 50</Text>
+                        <Text>{name}</Text>
+                        <Text>LVL {level}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -30,7 +39,7 @@ const UserHeader: React.FC = () => {
             <View style = {styles.topTabCoinContent}>
                 <FontAwesomeIcon icon = {faCoins} size = { 24 }/>   
                 <View style = {styles.coinSubTabContent}>
-                    <Text>25 IC</Text>
+                    <Text>{coins} IC</Text>
                 </View>
             </View>
             </TouchableOpacity>

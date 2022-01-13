@@ -25,8 +25,8 @@ const SignUp: React.FC = () => {
     
     const [secretQuestion, setSecretQuestion] = useState();
 
-    console.log(signed);
-    console.log(user);
+    // console.log(signed);
+    // console.log(user);
     
     async function handleSignIn () {
         await signIn();

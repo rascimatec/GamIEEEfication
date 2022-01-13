@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Linking, ScrollView, Text } from 'react-native';
+import { View, Linking, Text } from 'react-native';
 
 import styles from './styles';
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SpringUtils } from 'react-native-reanimated';
 
 const Help: React.FC = () => {
   return (

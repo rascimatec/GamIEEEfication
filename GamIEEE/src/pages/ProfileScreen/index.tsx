@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Image, Text } from 'react-native';
 
 import styles from './styles';
@@ -11,26 +11,54 @@ import { TextInput } from 'react-native-gesture-handler';
 import Footer from '../../components/footer'
 import Header from '../../components/header'
 import UserInfo from '../../components/userInfo'
+import AsyncStorage from '@react-native-community/async-storage';
 
-const ProfileScreen: React.FC = () => {
-    const { signOut, user } = useAuth();
+const ProfileScreen = () => {
+
+     interface User {
+         chapter: string,
+         coins: number,
+         descricao: string,
+         is_adm: number,
+         level: number,
+         membro: boolean,
+         ramo: string,
+        user_name: string,
+         xp: number,
+     }
+
+    const { signOut } = useAuth();
     const navigation = useNavigation();
+    const [user, setUser] = useState<User | null>(null);
 
+    useEffect(() => {
+        async function fetchMyAPI() {
+          let preUser = await AsyncStorage.getItem('@Gamieeefication:user');
+          preUser = JSON.parse(preUser)
+          console.log('Profile')
+          console.log(preUser)
+          setUser(preUser)
+        }
     
+        fetchMyAPI()
+      }, [])
     
     return (
         <View style = {styles.body}>
             <Header/>
             <View style = {styles.content}>
-                    <UserInfo/>
-                    <View><Text style = {styles.h1}>XP: 15.000</Text></View>
+                    <UserInfo
+                    name= {user?.user_name}
+                    level={user?.level}
+                    />
+                    <View><Text style = {styles.h1}>XP: {user?.xp}</Text></View>
                     <View style = {styles.tagBox}>
-                            <View style = {styles.tag1}><Text style = {styles.tagTitle}>RAS</Text></View>
-                            <View style = {styles.tag2}><FontAwesomeIcon style = {{color: '#00ccff'}} icon = {faGlobe} size={ 24 }  /><Text style = {styles.tagTitleMember}>MEMBRO IEEE</Text><FontAwesomeIcon style = {{color: '#00ccff'}} icon = {faGlobe} size={ 24 }  /></View>
+                            <View style = {styles.tag1}><Text style = {styles.tagTitle}>{user?.chapter}</Text></View>
+                            <View style = {styles.tag2}><FontAwesomeIcon style = {{color: '#00ccff'}} icon = {faGlobe} size={ 24 }  /><Text style = {styles.tagTitleMember}>{user?.membro ? 'MEMBRO IEEE':'SEM MEMBRESIA'}</Text><FontAwesomeIcon style = {{color: '#00ccff'}} icon = {faGlobe} size={ 24 }  /></View>
                     </View>
                     <View style = {styles.descriptionBox}>
                         <Text style = {styles.h1}>Sobre mim</Text>
-                        <TextInput defaultValue = {"Sem descrição"} maxLength = {235} multiline = {true} style = {styles.descriptionBoxInput}></TextInput>
+                        <TextInput defaultValue = {user?.descricao} maxLength = {235} multiline = {true} style = {styles.descriptionBoxInput}></TextInput>
                     </View>
                     <View style = {styles.h1Inline}><FontAwesomeIcon style = {{color: '#FFDF00'}} icon = {faAward} size={ 24 }  /><Text style = {styles.h1Inline}>Minhas insígnias</Text><FontAwesomeIcon style = {{color: '#FFDF00'}} icon = {faAward} size={ 24 }  /></View>
                     <View style = {styles.badgeBox}>

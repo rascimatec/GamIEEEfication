@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import styles from './styles';
 import inputStyles from './inputStyles';
@@ -7,30 +7,9 @@ import Footer from '../../components/footer'
 import Header from '../../components/header'
 import Button from '../../components/button'
 import RNPickerSelect from "react-native-picker-select";
-import RNDateTimePicker from '@react-native-community/datetimepicker';
 
 const ProfileScreen: React.FC = () => {
     const navigation = useNavigation();
-
-    const [selectedLanguage, setSelectedLanguage] = useState();
-
-    const pickerStyle = {
-        inputIOS: {
-            color: 'white',
-            paddingHorizontal: 10,
-            backgroundColor: 'red',
-            borderRadius: 5,
-        },
-        placeholder: {
-            color: 'white',
-          },
-        inputAndroid: {
-            color: 'white',
-            paddingHorizontal: 10,
-            backgroundColor: 'red',
-            borderRadius: 5,
-        },
-    };
 
     return (
         <View style={styles.body}>

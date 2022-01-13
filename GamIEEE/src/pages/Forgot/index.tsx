@@ -22,8 +22,8 @@ const Forgot: React.FC = () => {
     const { signed, user, signIn } = useAuth();
     const [selectedLanguage, setSelectedLanguage] = useState();
 
-    console.log(signed);
-    console.log(user);
+    // console.log(signed);
+    // console.log(user);
     
     async function handleSignIn () {
         await signIn();

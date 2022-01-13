@@ -1,23 +1,41 @@
-import React from 'react';
-import { View, Animated, Image, Text } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Image, Text } from 'react-native';
 
 import styles from './styles';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faAward, faGlobe } from '@fortawesome/free-solid-svg-icons'
-import { useNavigation } from '@react-navigation/native'
-import { useAuth } from '../../contexts/auth';
 import { TextInput } from 'react-native-gesture-handler';
 import Footer from '../../components/footer'
 import Header from '../../components/header'
-import LinearGradient from 'react-native-linear-gradient'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const ProfileScreen: React.FC = () => {
-    const { signOut, user } = useAuth();
-    const navigation = useNavigation();
 
-    
-    
+    interface User {
+        chapter: string,
+        coins: number,
+        descricao: string,
+        is_adm: number,
+        level: number,
+        membro: boolean,
+        ramo: string,
+        user_name: string,
+        xp: number,
+    }
+
+   const [user, setUser] = useState<User | null>(null);
+
+   useEffect(() => {
+       async function fetchMyAPI() {
+         let preUser = await AsyncStorage.getItem('@Gamieeefication:user');
+         preUser = JSON.parse(preUser)
+         setUser(preUser)
+       }
+   
+       fetchMyAPI()
+     }, [])
+
     return (
         <View style = {styles.body}>
             <Header/>
@@ -28,20 +46,20 @@ const ProfileScreen: React.FC = () => {
                                 <Image style = {styles.profilePic} source={{ uri: 'https://res.cloudinary.com/gamieeefication/image/upload/v1616123872/Hiei_cs6k1p.jpg'}}/>
                             </View>
                             <View style = {styles.profileInfo}>
-                                <Text style = {styles.h2}>{user?.name}</Text>
-                                <Text style = {styles.h2}>Nível 50</Text>
+                                <Text style = {styles.h2}>{user?.user_name}</Text>
+                                <Text style = {styles.h2}>LVL {user?.level}</Text>
                                 <Text style = {styles.h2}>Voluntário</Text>
                             </View>
                         </View>
                     </View>
-                    <View><Text style = {styles.h1}>XP: 15.000</Text></View>
+                    <View><Text style = {styles.h1}>XP: {user?.xp}</Text></View>
                     <View style = {styles.tagBox}>
-                            <View style = {styles.tag1}><Text style = {styles.tagTitle}>RAS</Text></View>
+                            <View style = {styles.tag1}><Text style = {styles.tagTitle}>{user?.chapter}</Text></View>
                             <View style = {styles.tag2}><FontAwesomeIcon style = {{color: '#00ccff'}} icon = {faGlobe} size={ 24 }  /><Text style = {styles.tagTitleMember}>MEMBRO IEEE</Text><FontAwesomeIcon style = {{color: '#00ccff'}} icon = {faGlobe} size={ 24 }  /></View>
                     </View>
                     <View style = {styles.descriptionBox}>
                         <Text style = {styles.h1}>Sobre mim</Text>
-                        <TextInput defaultValue = {"Sem descrição"} maxLength = {235} multiline = {true} style = {styles.descriptionBoxInput}></TextInput>
+                        <TextInput defaultValue = {user?.descricao} maxLength = {235} multiline = {true} style = {styles.descriptionBoxInput}></TextInput>
                     </View>
                     <View style = {styles.h1Inline}><FontAwesomeIcon style = {{color: '#FFDF00'}} icon = {faAward} size={ 24 }  /><Text style = {styles.h1Inline}>Minhas insígnias</Text><FontAwesomeIcon style = {{color: '#FFDF00'}} icon = {faAward} size={ 24 }  /></View>
                     <View style = {styles.badgeBox}>

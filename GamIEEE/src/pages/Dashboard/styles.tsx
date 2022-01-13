@@ -10,7 +10,6 @@ const styles = StyleSheet.create( {
         padding: 5
     },
     content: {
-        marginTop: 50,
         justifyContent: "center",
         elevation: -1
     },

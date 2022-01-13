@@ -7,9 +7,10 @@ import Header from '../../../components/header'
 import ActiveTask from '../../../components/activeTask'
 
 const ActiveTasks: React.FC = () => {
+
     return (
         <View style={styles.body}>
-            <Header />
+            <Header/>
             <View style={styles.content}>
                 <View style={styles.h1Inline}><Text style={styles.h1Inline}>Tarefas Ativas</Text></View>
                 <ScrollView style={styles.scrollContent}>

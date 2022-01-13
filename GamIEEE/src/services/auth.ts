@@ -1,3 +1,4 @@
+import { PanResponder } from 'react-native';
 import api from '../services/api'
 
 interface Response {
@@ -10,15 +11,15 @@ interface Response {
     }
 }
 
-export async function signIn() { 
+export async function signIn(username: string, password: string) { 
     try {
       const response = await 
-        api.post('/user', {
-        username: 'jsilva',
-        password: '123456'
+        api.post('/login', {
+        username: username,
+        password: password
       })
 
-      console.log(response.data)
+      return response.data
     } catch (error) {
       console.error(error);
     }
